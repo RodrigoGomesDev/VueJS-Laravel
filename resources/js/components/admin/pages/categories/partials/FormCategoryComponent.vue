@@ -19,14 +19,22 @@ export default {
             type: Object|Array,
             default: () => {
                 return {
+                    id: '',
                     name: ''
                 }
             }
+        },
+        updating: {
+            require: false,
+            type: Boolean,
+            default: false
         }
     },
     methods: {
         submitForm () {
-            this.$store.dispatch('storeCategory', this.category)
+            const action = this.updating ? 'updateCategory' : 'storeCategory'
+
+            this.$store.dispatch(action, this.category)
                         .then(() => this.$router.push({ name: 'admin.categories' }))
                         .catch()
         }

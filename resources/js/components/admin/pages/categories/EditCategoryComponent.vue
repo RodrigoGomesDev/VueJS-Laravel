@@ -2,7 +2,10 @@
     <div>
         <h1>Editar Categoria</h1>
 
-        <form-cat :category="category"></form-cat>
+        <form-cat 
+        :category="category"
+        :updating="true"
+        ></form-cat>
     </div>
     
 </template>

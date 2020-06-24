@@ -41,7 +41,20 @@ export default {
             context.commit('CHANGE_PRELOADER', true)
 
             return new Promise((resolve, reject ) => {
-                axios.post('http://laravel-vue.test/api/category', params)
+                axios.post(`http://laravel-vue.test/api/category`, params)
+                        .then(response => resolve())                    
+                        
+                        .catch(errors => reject(errors))
+
+                        .finally(() => context.commit('CHANGE_PRELOADER', false))
+            })
+        },
+       
+        updateCategory (context, params) {
+            context.commit('CHANGE_PRELOADER', true)
+
+            return new Promise((resolve, reject ) => {
+                axios.put(`http://laravel-vue.test/api/category/${params.id}`, params)
                         .then(response => resolve())                    
                         
                         .catch(errors => reject(errors))
@@ -50,7 +63,7 @@ export default {
             })
         }
     },
-    getters: {
+     getters: {
         
     }
 }
