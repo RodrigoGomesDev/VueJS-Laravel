@@ -24,10 +24,23 @@ export default {
                     .finally(() => context.commit('CHANGE_PRELOADER', false))
         },
 
+        loadCategory (context, id) {
+            context.commit('CHANGE_PRELOADER', true)
+
+            return new Promise((resolve, reject ) => {
+                axios.get(`http://laravel-vue.test/api/category/${id}`)
+                        .then(response => resolve(response.data))                    
+        
+                        .catch(errors => reject(errors))
+
+                        .finally(() => context.commit('CHANGE_PRELOADER', false))
+            })
+        },
+
         storeCategory (context, params) {
             context.commit('CHANGE_PRELOADER', true)
 
-            new Promise((resolve, reject ) => {
+            return new Promise((resolve, reject ) => {
                 axios.post('http://laravel-vue.test/api/category', params)
                         .then(response => resolve())                    
                         

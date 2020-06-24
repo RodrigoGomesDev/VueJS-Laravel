@@ -31,7 +31,8 @@ const routes = [
             {
                 path : 'categorias/:id/editar', 
                 component: EditCategoryComponent, 
-                name: 'admin.categories.edit'
+                name: 'admin.categories.edit',
+                props: true
             },
         ]
     },
