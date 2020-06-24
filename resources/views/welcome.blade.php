@@ -17,7 +17,7 @@
     </head>
     <body>
         <div id="app">
-            {{-- <vue-snotify></vue-snotify> --}}
+            <vue-snotify></vue-snotify>
 
             <router-view></router-view>
             <preloader-component></preloader-component>
