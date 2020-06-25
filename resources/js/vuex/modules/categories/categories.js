@@ -14,12 +14,16 @@ export default {
             context.commit('CHANGE_PRELOADER', true)
             axios.get('http://laravel-vue.test/api/category')
                     .then(response => {
-                        console.log(response)
+                        // console.log(response)
                     
                         context.commit('LOAD_CATEGORIES', response)
                     })
                     .catch(errors => {
                         console.log(errors);
+                        this.$snotify.errors('Categoria não encontrada', '404')
+
+                        this.$router.push({name: 'admin.categories'})
+
                     })
                     .finally(() => context.commit('CHANGE_PRELOADER', false))
         },
@@ -60,6 +64,17 @@ export default {
                         .catch(errors => reject(errors))
 
                         .finally(() => context.commit('CHANGE_PRELOADER', false))
+            })
+        },
+
+        destroyCategory (context, id) {
+            context.commit('CHANGE_PRELOADER', true)
+
+            return new Promise((resolve, reject ) => {
+                axios.delete(`http://laravel-vue.test/api/category/${id}`)
+                        .then(response => resolve())                    
+                        
+                        .catch(errors => reject(errors))
             })
         }
     },

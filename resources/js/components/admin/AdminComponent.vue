@@ -1,12 +1,12 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav pt-2 pb-2">
                 <li class="nav-item mr-5">
-                    <router-link :to="{name: 'admin.dashboard'}">Dashboard</router-link>
+                    <router-link :to="{name: 'admin.dashboard'}" class="text-white">Dashboard</router-link>
                 </li>
                 <li>
-                    <router-link :to="{name: 'admin.categories'}">Categories ({{ totalCategories }})</router-link>
+                    <router-link :to="{name: 'admin.categories'}" class="text-white">Categories ({{ totalCategories }})</router-link>
                 </li>
             </ul>
         </nav>

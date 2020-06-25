@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -20,11 +21,16 @@ class ApiController extends Controller
     }
     
     public function show($id) {
-        $category = $this->Category->find($id);
-    
+        if (!$category = $this->Category->find($id)) {
+            return response()->back();
+            // return response()->json(["msg" => "404 NOT FOUND", 404]);
+        }
+
         return response()->json($category);
+        // $category = $this->Category->find($id);
+        
     }
-    
+
     public function store(Request $request) {
         $create_category = $this->Category->create($request->all());
         return response()->json(["msg" => "Categoria criada com sucesso"]);
@@ -41,4 +47,5 @@ class ApiController extends Controller
         $delete_category = $this->Category->destroy($id);
         return response()->json(["msg" => "A categoria foi deletado com sucesso"]);
     }
+
 }

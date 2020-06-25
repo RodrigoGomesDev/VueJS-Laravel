@@ -19,15 +19,23 @@ export default {
         }
     },
     created () {
-        this.$store.dispatch('loadCategory', this.id)
-                    .then (response => this.category = response)
-                    .catch (errors => {
-                        console.log(errors)
-                    })
+        this.loadCategory();
     },
     data () {
         return {
             category: {}
+        }
+    },
+    methods: {
+        loadCategory() {
+            this.$store.dispatch('loadCategory', this.id)
+                        .then (response => this.category = response)
+                        .catch(error => {
+                            console.log(error)
+                            this.$snotify.error('Categoria não encontrada', '404')
+
+                            this.$router.push({name: 'admin.categories'})
+                        })
         }
     },
 
